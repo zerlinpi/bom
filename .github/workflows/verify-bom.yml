@@ -26,5 +26,5 @@ jobs:
 
       - name: Prepare BOM test matrix
         env:
-          SAMPLE_PLUGIN_OPTS: -Dset.changelist
+          SAMPLE_PLUGIN_OPTS: -Dset.changelist -Dignore.dirt
         run: bash prep.sh
