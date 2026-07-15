@@ -1,0 +1,30 @@
+name: Verify BOM change
+
+on:
+  push:
+    branches:
+      - ci/verify-build-token-root
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v5
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Prepare BOM test matrix
+        env:
+          SAMPLE_PLUGIN_OPTS: -Dset.changelist
+        run: bash prep.sh
